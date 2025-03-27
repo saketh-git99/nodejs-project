@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Creates a Lambda function and API Gateway.'
+
+Resources:
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: MyNodeAPILambda
+      Runtime: nodejs18.x
+      Handler: index.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+              return {
+                  statusCode: 200,
+                  body: JSON.stringify({ message: 'Hello from Lambda!' })
+              };
+          };
+
+  ApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: MyAPI
+
+Outputs:
+  LambdaFunctionARN:
+    Value: !GetAtt LambdaFunction.Arn

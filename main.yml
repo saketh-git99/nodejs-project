@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Main stack that includes networking, compute, CI/CD, Lambda, and IAM.'
+
+Resources:
+  NetworkingStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: networking.yml
+
+  ComputeStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: compute.yml
+      Parameters:
+        VPCId: !GetAtt NetworkingStack.Outputs.VPCId
+        PublicSubnet1Id: !GetAtt NetworkingStack.Outputs.PublicSubnet1Id
+        PublicSubnet2Id: !GetAtt NetworkingStack.Outputs.PublicSubnet2Id
+
+  CICDStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ci-cd.yml
+
+  LambdaAPIStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: lambda-api.yml
+
+  IAMRolesStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: iam-roles.yml

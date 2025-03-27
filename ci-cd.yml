@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CodePipeline and CodeBuild for CI/CD.'
+
+Resources:
+  ArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: nodejs-bucket
+
+  CodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: '1'
+              Configuration:
+                Owner: 'your-github-user'
+                Repo: 'your-repo'
+                Branch: 'main'
+                OAuthToken: '{{resolve:secretsmanager:github-token}}'
+              OutputArtifacts:
+                - Name: SourceOutput
+
+Outputs:
+  PipelineName:
+    Value: !Ref CodePipeline
