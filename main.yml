@@ -5,12 +5,17 @@ Resources:
   NetworkingStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: networking.yml
+      TemplateURL: https://nodejs-bucket-27032025.s3.eu-west-2.amazonaws.com/networking.yml
+
+  IAMRolesStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://nodejs-bucket-27032025.s3.eu-west-2.amazonaws.com/iam-roles.yml
 
   ComputeStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: compute.yml
+      TemplateURL: https://nodejs-bucket-27032025.s3.eu-west-2.amazonaws.com/compute.yml
       Parameters:
         VPCId: !GetAtt NetworkingStack.Outputs.VPCId
         PublicSubnet1Id: !GetAtt NetworkingStack.Outputs.PublicSubnet1Id
@@ -19,14 +24,11 @@ Resources:
   CICDStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: ci-cd.yml
+      TemplateURL: https://nodejs-bucket-27032025.s3.eu-west-2.amazonaws.com/ci-cd.yml
 
   LambdaAPIStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: lambda-api.yml
-
-  IAMRolesStack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: iam-roles.yml
+      TemplateURL: https://nodejs-bucket-27032025.s3.eu-west-2.amazonaws.com/lambda-api.yml
+      Parameters:
+        LambdaExecutionRoleArn: !ImportValue LambdaExecutionRoleARN

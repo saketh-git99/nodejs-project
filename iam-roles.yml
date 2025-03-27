@@ -47,4 +47,7 @@ Resources:
 
 Outputs:
   LambdaExecutionRoleARN:
+    Description: "ARN of the Lambda Execution Role"
     Value: !GetAtt LambdaExecutionRole.Arn
+    Export:
+      Name: LambdaExecutionRoleARN

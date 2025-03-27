@@ -1,6 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'EC2, Launch Template, Auto Scaling, and ALB.'
 
+Parameters:
+  PublicSubnet1Id:
+    Type: String
+  PublicSubnet2Id:
+    Type: String
+  SecurityGroupId:
+    Type: String
+
 Resources:
   LaunchTemplate:
     Type: AWS::EC2::LaunchTemplate

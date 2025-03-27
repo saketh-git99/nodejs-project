@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Creates a Lambda function and API Gateway.'
 
+Parameters:
+  LambdaExecutionRoleArn:
+    Type: String
+    Description: ARN of the Lambda Execution Role
+
 Resources:
   LambdaFunction:
     Type: AWS::Lambda::Function
@@ -8,7 +13,7 @@ Resources:
       FunctionName: MyNodeAPILambda
       Runtime: nodejs18.x
       Handler: index.handler
-      Role: !GetAtt LambdaExecutionRole.Arn
+      Role: !Ref LambdaExecutionRoleArn
       Code:
         ZipFile: |
           exports.handler = async (event) => {
