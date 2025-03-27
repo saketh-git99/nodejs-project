@@ -5,7 +5,7 @@ Resources:
   ArtifactBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: nodejs-bucket
+      BucketName: nodejs-bucket-27032025
 
   CodePipeline:
     Type: AWS::CodePipeline::Pipeline
