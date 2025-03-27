@@ -6,8 +6,8 @@ Resources:
     Type: AWS::EC2::LaunchTemplate
     Properties:
       LaunchTemplateData:
-        ImageId: ami-12345678  # Replace with actual AMI
-        InstanceType: t2.micro
+        ImageId: ami-0727cf12519cc2b5b
+        InstanceType: t2.medium
         SecurityGroupIds:
           - !Ref SecurityGroupId
         UserData:

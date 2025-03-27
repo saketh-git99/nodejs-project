@@ -23,8 +23,8 @@ Resources:
                 Provider: GitHub
                 Version: '1'
               Configuration:
-                Owner: 'your-github-user'
-                Repo: 'your-repo'
+                Owner: 'saketh-git99'
+                Repo: 'nodejs-project'
                 Branch: 'main'
                 OAuthToken: '{{resolve:secretsmanager:github-token}}'
               OutputArtifacts:
