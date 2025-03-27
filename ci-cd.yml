@@ -7,6 +7,12 @@ Resources:
     Properties:
       BucketName: nodejs-bucket-27032025
 
+  GitHubTokenSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: github-token
+      SecretString: '{"token": "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"}'
+
   CodePipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
